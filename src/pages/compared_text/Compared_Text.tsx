@@ -17,13 +17,21 @@ export default function ComparedText() {
                 : "bg-[#4571E4] hover:bg-[#5856D6]"
             } cursor-pointer text-white`}
             onClick={hooks.resetCompering}
-            disabled={!hooks.isCompering ? true : false}
+            disabled={!hooks.isCompering}
           >
             <img src={plusButtonLogo} alt="plus_button" />
             <p>ახლის გახსნა</p>
           </button>
         </div>
       </div>
+
+      {
+        (hooks.deletedCords.length === 0 && hooks.updatedCords.length === 0 && hooks.hasComperedOnce) && (
+          <div className="mt-4">
+            <p className="text-2xl font-bold text-green-800">ცვლილება ვერ მოიძებნა!</p>
+          </div>
+        )
+      }
 
       {/* Content */}
       {!hooks.isCompering ? (
@@ -52,58 +60,57 @@ export default function ComparedText() {
         </div>
       ) : (
         <div className="flex items-center gap-2.5 h-[543px] mt-[24px]">
+          {/* Old text */}
           <div className="resize-none bg-[#F0F7FF] h-full w-full rounded-lg p-3 text-lg leading-[26px] flex-6 text-[#383A48]">
-            {hooks.textToCompare.split(" ").map((item: string) => {
-              if (hooks.deletedCords.includes(item)) {
+            {hooks.textToCompare
+              .split(" ")
+              .map((item: string, index: number) => {
+                if (hooks.deletedCords.includes(index.toString())) {
+                  return (
+                    <span
+                      key={`old-${index}`}
+                      className="inline-block bg-red-600 text-white mr-[7px] px-1 rounded"
+                    >
+                      {item}
+                    </span>
+                  );
+                }
                 return (
-                  <span
-                    key={`${Math.random()}-${item}`}
-                    className="inline-block bg-red-900 text-white mr-[7px]"
-                  >
+                  <span key={`old-${index}`} className="inline-block mr-[7px]">
                     {item}
                   </span>
                 );
-              } else {
-                return (
-                  <span
-                    key={`${Math.random()}-${item}`}
-                    className="inline-block mr-[7px]"
-                  >
-                    {item}
-                  </span>
-                );
-              }
-            })}
+              })}
           </div>
+
           <div className="w-[32px] h-[32px] ">
             <CgArrowsHAlt className="w-full h-full object-contain " />
           </div>
+
+          {/* New text */}
           <div className="resize-none bg-[#F0F7FF] h-full w-full rounded-lg p-3 text-lg leading-[26px] flex-6 text-[#383A48]">
-            {hooks.updatedText.split(" ").map((item: string) => {
-              if (hooks.updatedCords.includes(item)) {
+            {hooks.updatedText.split(" ").map((item: string, index: number) => {
+              if (hooks.updatedCords.includes(index.toString())) {
                 return (
                   <span
-                    key={`${Math.random()}-${item}`}
-                    className="inline-block bg-green-400 text-white mr-[7px]"
-                  >
-                    {item}
-                  </span>
-                );
-              } else {
-                return (
-                  <span
-                    key={`${Math.random()}-${item}`}
-                    className="inline-block mr-[7px]"
+                    key={`new-${index}`}
+                    className="inline-block bg-green-500 text-white mr-[7px] px-1 rounded"
                   >
                     {item}
                   </span>
                 );
               }
+              return (
+                <span key={`new-${index}`} className="inline-block mr-[7px]">
+                  {item}
+                </span>
+              );
             })}
           </div>
         </div>
       )}
 
+      {/* Compare Button */}
       <div className="mt-8">
         <button
           className={`text-sm px-[37px] py-2.5 ${
@@ -112,7 +119,7 @@ export default function ComparedText() {
               : "bg-[#4571E4] hover:bg-[#5856D6] cursor-pointer"
           }  rounded-[6px] text-white  leading-7 mx-auto block`}
           onClick={hooks.compareText}
-          disabled={hooks.isCompering ? true : false}
+          disabled={hooks.isCompering}
         >
           შედარება
         </button>
