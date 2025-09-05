@@ -1,6 +1,9 @@
 import { CgArrowsHAlt } from "react-icons/cg";
 import useComparedTextHooks from "./Compared_Text_Hooks";
 import { plusButtonLogo } from "../../assets";
+import { FaArrowDown } from "react-icons/fa";
+import { FaArrowUp } from "react-icons/fa";
+import { FaCheck } from "react-icons/fa6";
 
 export default function ComparedText() {
   const hooks = useComparedTextHooks();
@@ -8,7 +11,53 @@ export default function ComparedText() {
   return (
     <div className="text-black p-6">
       {/* Controllers */}
-      <div className="pb-4 border-b border-[#EDEDED]">
+      <div className="flex items-center justify-between pb-4 border-b border-[#EDEDED]">
+        <div className="flex items-center gap-6">
+          <div className="relative">
+            <button
+              onClick={hooks.handleLanguage}
+              className="border-2 flex gap-[35px] items-center border-[#E0E0E0] transition-all hover:bg-[#E0E0E0] rounded-[8px] cursor-pointer text-[#383A48] px-3.5 py-[9px]"
+            >
+              <p>ქართული</p>
+              {hooks.languageModal ? (
+                <FaArrowUp size={14} />
+              ) : (
+                <FaArrowDown size={14} />
+              )}
+            </button>
+
+            {hooks.languageModal && (
+              <div className="border-[#4571E4] flex flex-col gap-2 border-2 bg-white absolute z-10 top-12 rounded-[8px] px-3 py-[18px] w-full left-0">
+                <div className="flex items-center gap-1">
+                  <div
+                    onClick={hooks.handleLanguage}
+                    className="w-[12px] cursor-pointer h-[12px] border border-[#E0E0E0] rounded-full bg-transparent hover:bg-[#E0E0E0]"
+                  ></div>
+                  <p className="text-[#383A48] text-[12px]">ქართული</p>
+                </div>
+
+                <div className="flex items-center gap-1">
+                  <div
+                    onClick={hooks.handleLanguage}
+                    className="w-[12px] cursor-pointer h-[12px] border border-[#E0E0E0] rounded-full bg-transparent hover:bg-[#E0E0E0]"
+                  ></div>
+                  <p className="text-[#383A48] text-[12px]">ქართული</p>
+                </div>
+              </div>
+            )}
+          </div>
+
+          <div className="flex items-center gap-2">
+            <div
+              onClick={hooks.handleFormat}
+              className="flex items-center justify-center w-[20px] h-[20px] bg-transparent border cursor-pointer border-[#E0E0E0] rounded-[4px]"
+            >
+              {hooks.isFormat && <FaCheck size={14} />}
+            </div>
+            <p className="text-[#383A48] text-[14px]">ფორმატის შენარჩუნება</p>
+          </div>
+        </div>
+
         <div>
           <button
             className={`px-[16px] py-[7px] flex items-center gap-1 leading-7 rounded-[6px] ${
@@ -25,13 +74,15 @@ export default function ComparedText() {
         </div>
       </div>
 
-      {
-        (hooks.deletedCords.length === 0 && hooks.updatedCords.length === 0 && hooks.hasComperedOnce) && (
+      {hooks.deletedCords.length === 0 &&
+        hooks.updatedCords.length === 0 &&
+        hooks.hasComperedOnce && (
           <div className="mt-4">
-            <p className="text-2xl font-bold text-green-800">ცვლილება ვერ მოიძებნა!</p>
+            <p className="text-2xl font-bold text-green-800">
+              ცვლილება ვერ მოიძებნა!
+            </p>
           </div>
-        )
-      }
+        )}
 
       {/* Content */}
       {!hooks.isCompering ? (
