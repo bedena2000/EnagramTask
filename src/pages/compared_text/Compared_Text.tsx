@@ -4,6 +4,7 @@ import { plusButtonLogo } from "../../assets";
 import { FaArrowDown } from "react-icons/fa";
 import { FaArrowUp } from "react-icons/fa";
 import { FaCheck } from "react-icons/fa6";
+import ComparingAnimation from "../../components/animations/comparingAnimation/ComparingAnimation";
 
 export default function ComparedText() {
   const hooks = useComparedTextHooks();
@@ -61,10 +62,10 @@ export default function ComparedText() {
         <div>
           <button
             className={`px-[16px] w-full md:w-auto py-[7px] flex items-center gap-1 leading-7 rounded-[6px] ${
-              !hooks.isCompering
+              !hooks.isCompering || hooks.isLoading
                 ? "bg-[#383A4899]"
-                : "bg-[#4571E4] hover:bg-[#5856D6]"
-            } cursor-pointer text-white`}
+                : "bg-[#4571E4] hover:bg-[#5856D6] cursor-pointer"
+            }  text-white`}
             onClick={hooks.resetCompering}
             disabled={!hooks.isCompering}
           >
@@ -74,18 +75,11 @@ export default function ComparedText() {
         </div>
       </div>
 
-      {hooks.deletedCords.length === 0 &&
-        hooks.updatedCords.length === 0 &&
-        hooks.hasComperedOnce && (
-          <div className="mt-4">
-            <p className="text-2xl font-bold text-green-800">
-              ცვლილება ვერ მოიძებნა!
-            </p>
-          </div>
-        )}
-
-      {/* Content */}
-      {!hooks.isCompering ? (
+      {hooks.isLoading ? (
+        <div className="mx-auto mt-[200px] mb-[200px] w-fit">
+          <ComparingAnimation delay={6} />
+        </div>
+      ) : !hooks.isCompering ? (
         <div className="flex flex-col md:flex-row items-center gap-2.5 h-[543px] mt-[24px]">
           <textarea
             name="compared_text_left_side_content"
@@ -163,12 +157,12 @@ export default function ComparedText() {
       <div className="mt-8">
         <button
           className={`text-sm px-[37px] py-2.5 ${
-            hooks.isCompering
+            hooks.isCompering || hooks.isLoading
               ? "bg-[#383A4899] "
               : "bg-[#4571E4] hover:bg-[#5856D6] cursor-pointer"
           }  rounded-[6px] text-white  leading-7 mx-auto block`}
           onClick={hooks.compareText}
-          disabled={hooks.isCompering}
+          disabled={hooks.isCompering || hooks.isLoading}
         >
           შედარება
         </button>

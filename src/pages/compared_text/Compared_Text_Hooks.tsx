@@ -12,6 +12,7 @@ export default function useComparedTextHooks() {
   const [isCompering, setIsCompering] = useState(false);
   const [hasComperedOnce, setHasComperedOnce] = useState(false);
   const [isFormat, setIsFormat] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
 
   const [languageModal, setLanguageModal] = useState(false);
 
@@ -27,6 +28,7 @@ export default function useComparedTextHooks() {
   };
 
   const compareText = () => {
+    setIsLoading(true);
     setHasComperedOnce(true);
     const oldWords = textToCompare.split(" ");
     const newWords = updatedText.split(" ");
@@ -34,10 +36,9 @@ export default function useComparedTextHooks() {
     const oldCount: wordObject = {};
     const newCount: wordObject = {};
 
-    const deleted: number[] = []; // store indices of deleted words
-    const updated: number[] = []; // store indices of new words
+    const deleted: number[] = [];
+    const updated: number[] = [];
 
-    // Count words
     oldWords.forEach((word) => {
       oldCount[word] = (oldCount[word] || 0) + 1;
     });
@@ -45,27 +46,28 @@ export default function useComparedTextHooks() {
       newCount[word] = (newCount[word] || 0) + 1;
     });
 
-    // Find deleted words (by index)
     oldWords.forEach((word, idx) => {
       if (!newCount[word]) {
         deleted.push(idx);
       } else {
-        newCount[word]--; // consume one occurrence
+        newCount[word]--;
       }
     });
 
-    // Find new words (by index)
     newWords.forEach((word, idx) => {
       if (!oldCount[word]) {
         updated.push(idx);
       } else {
-        oldCount[word]--; // consume one occurrence
+        oldCount[word]--;
       }
     });
 
-    setDeletedCords(deleted.map(String)); // store as string[] (your current type)
-    setUpdatedCords(updated.map(String));
-    setIsCompering(true);
+    setTimeout(() => {
+      setDeletedCords(deleted.map(String));
+      setUpdatedCords(updated.map(String));
+      setIsCompering(true);
+      setIsLoading(false);
+    }, 6000);
   };
 
   const resetCompering = () => {
@@ -98,5 +100,7 @@ export default function useComparedTextHooks() {
 
     isFormat,
     handleFormat,
+
+    isLoading,
   };
 }

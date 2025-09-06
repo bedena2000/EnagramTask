@@ -1,8 +1,6 @@
 import {
   checkLogo,
-  chevronLeftLogo,
   comparedTextLogo,
-  enagramLogo,
   pdfConvertationLogo,
   textToVoiceLogo,
   voiceToTextLogo,
