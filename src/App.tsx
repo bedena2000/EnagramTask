@@ -13,12 +13,12 @@ import Header from "./components/header/Header";
 const App = () => {
   return (
     <div>
-      <div className="grid grid-cols-12 min-h-screen">
-        <div className="col-span-2">
+      <div className="flex flex-col lg:flex-row   min-h-screen">
+        <div className="flex-2">
           <Header />
         </div>
 
-        <div className="col-span-10">
+        <div className="flex-10">
           <Routes>
             <Route path="/" element={<Home />} />
             <Route path="/speller" element={<Speller />} />

@@ -1,7 +1,9 @@
+import DevelopingPage from "../../components/developing_page/DevelopingPage";
+
 export default function PDFConvertation() {
   return (
     <div>
-      <p>PDF page</p>
+      <DevelopingPage />
     </div>        
   )
 }

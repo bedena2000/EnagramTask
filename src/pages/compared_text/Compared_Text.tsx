@@ -11,8 +11,8 @@ export default function ComparedText() {
   return (
     <div className="text-black p-6">
       {/* Controllers */}
-      <div className="flex items-center justify-between pb-4 border-b border-[#EDEDED]">
-        <div className="flex items-center gap-6">
+      <div className="flex gap-4 md:gap-0 flex-col md:flex-row md:items-center justify-between pb-4 border-b border-[#EDEDED]">
+        <div className="flex flex-col md:flex-row md:items-center gap-6">
           <div className="relative">
             <button
               onClick={hooks.handleLanguage}
@@ -60,7 +60,7 @@ export default function ComparedText() {
 
         <div>
           <button
-            className={`px-[16px] py-[7px] flex items-center gap-1 leading-7 rounded-[6px] ${
+            className={`px-[16px] w-full md:w-auto py-[7px] flex items-center gap-1 leading-7 rounded-[6px] ${
               !hooks.isCompering
                 ? "bg-[#383A4899]"
                 : "bg-[#4571E4] hover:bg-[#5856D6]"
@@ -86,7 +86,7 @@ export default function ComparedText() {
 
       {/* Content */}
       {!hooks.isCompering ? (
-        <div className="flex items-center gap-2.5 h-[543px] mt-[24px]">
+        <div className="flex flex-col md:flex-row items-center gap-2.5 h-[543px] mt-[24px]">
           <textarea
             name="compared_text_left_side_content"
             className="resize-none bg-[#F0F7FF] h-full w-full rounded-lg p-3 text-lg leading-[26px] flex-6 text-[#383A48]"
@@ -110,9 +110,8 @@ export default function ComparedText() {
           ></textarea>
         </div>
       ) : (
-        <div className="flex items-center gap-2.5 h-[543px] mt-[24px]">
-          {/* Old text */}
-          <div className="resize-none bg-[#F0F7FF] h-full w-full rounded-lg p-3 text-lg leading-[26px] flex-6 text-[#383A48]">
+        <div className="flex flex-col md:flex-ro items-center gap-2.5 h-[543px] mt-[24px]">
+          <div className="resize-none overflow-scroll flex-wrap bg-[#F0F7FF] h-full w-full rounded-lg p-3 text-lg leading-[26px] flex-6 text-[#383A48]">
             {hooks.textToCompare
               .split(" ")
               .map((item: string, index: number) => {
@@ -138,8 +137,7 @@ export default function ComparedText() {
             <CgArrowsHAlt className="w-full h-full object-contain " />
           </div>
 
-          {/* New text */}
-          <div className="resize-none bg-[#F0F7FF] h-full w-full rounded-lg p-3 text-lg leading-[26px] flex-6 text-[#383A48]">
+          <div className="resize-none overflow-scroll flex-wrap bg-[#F0F7FF] h-full w-full rounded-lg p-3 text-lg leading-[26px] flex-6 text-[#383A48]">
             {hooks.updatedText.split(" ").map((item: string, index: number) => {
               if (hooks.updatedCords.includes(index.toString())) {
                 return (

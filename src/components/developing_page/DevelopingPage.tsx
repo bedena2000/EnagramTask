@@ -1,14 +1,12 @@
-import { MdError } from "react-icons/md";
 import { Link } from "react-router";
+import { SiFramework } from "react-icons/si";
 
-export default function ErrorPage() {
+export default function DevelopingPage() {
   return (
     <div className="flex items-center justify-center text-black p-4">
       <div className="p-4 rounded-4xl border-2 shadow-2xl flex items-center gap-8 flex-col">
-        <MdError size={102} className="mx-auto" />
-        <p className="font-bold text-center">
-          this page doesn't exist
-        </p>
+        <SiFramework size={102} className="mx-auto" />
+        <p className="font-bold text-center">Sorry, this page is not developed yet</p>
 
         <Link
           to="/"
