@@ -1,14 +1,14 @@
 import { useState, useEffect } from "react";
 
 interface ComparingAnimationProps {
-  delay: number; // total duration in seconds
+  delay: number;
 }
 
 const ComparingAnimation = ({ delay }: ComparingAnimationProps) => {
   const [progress, setProgress] = useState(0);
 
   useEffect(() => {
-    const stepDelay = (delay * 1000) / 100; 
+    const stepDelay = (delay * 1000) / 100;
 
     const interval = setInterval(() => {
       setProgress((prev) => {

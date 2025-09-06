@@ -1,5 +1,5 @@
 import { menu } from "./HeaderData";
-import { enagramLogo } from "../../assets";
+import { dotsMenu, enagramLogo, userLogo } from "../../assets";
 import { Link } from "react-router";
 import type { MenuItem } from "../../types";
 import useHeaderHooks from "./HeaderHooks";
@@ -52,6 +52,19 @@ export default function Header() {
               </Link>
             );
           })}
+        </div>
+
+        <div className="absolute bottom-0 px-3.5 py-5 w-full left-0 border hidden lg:block border-transparent border-t-[#9EB9FF33]">
+          <div className="flex items-center justify-between">
+            <div className="flex items-center gap-[5px]">
+              <div><img src={userLogo} alt="user_logo" /></div>
+              <p>თამარ ონიანი</p>
+            </div>
+
+            <div className="cursor-pointer">
+              <img src={dotsMenu} alt="dots_menu" />
+            </div>
+          </div>
         </div>
       </div>
 

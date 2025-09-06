@@ -6,7 +6,9 @@ import pdfConvertationLogo from "./logo/pdf_convertation_logo.png";
 import textToVoiceLogo from "./logo/text_to_voice_logo.png";
 import voiceToTextLogo from "./logo/voice_to_text_logo.png";
 import switchArrowsLogo from "./logo/switch_arrows_logo.png";
-import plusButtonLogo from './logo/plus_button_logo.png';
+import plusButtonLogo from "./logo/plus_button_logo.png";
+import userLogo from "./logo/user_logo.png";
+import dotsMenu from './logo/dots-menu_logo.png';
 
 export {
   checkLogo,
@@ -17,5 +19,7 @@ export {
   textToVoiceLogo,
   voiceToTextLogo,
   switchArrowsLogo,
-  plusButtonLogo
+  plusButtonLogo,
+  userLogo,
+  dotsMenu
 };
